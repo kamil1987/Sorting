@@ -1,0 +1,92 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+
+public class Solution {
+
+    static int[] arr;
+    static int[] closestNumbers(int[] arr) {
+        int n = arr.length;
+        int position = 0;
+        quickSort(0, n-1);
+        int []result = new int[n]; 
+        int sm = Math.abs(arr[0] - arr[1]);
+        for(int arr_i = 2; arr_i < n; arr_i++){
+            if( Math.abs(arr[arr_i-1] - arr[arr_i])<sm){
+                sm = Math.abs(arr[arr_i-1] - arr[arr_i]);
+                result[0] = arr[arr_i-1];
+                result[1] = arr[arr_i];
+                position = 2;
+            } 
+            else if (Math.abs(arr[arr_i-1] - arr[arr_i]) == sm){
+                result[position] = arr[arr_i-1];
+                position++;
+                result[position] = arr[arr_i];
+                position++;
+            }
+        }
+        
+        int []result2 = new int[position];
+        for(int arr_i = 0; arr_i < position; arr_i++){
+            result2[arr_i] = result[arr_i];
+        }
+        return result2;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+         arr = new int[n];
+        for(int arr_i = 0; arr_i < n; arr_i++){
+            arr[arr_i] = in.nextInt();
+        }
+        int[] result = closestNumbers(arr);
+        for (int i = 0; i < result.length; i++) {
+            System.out.print(result[i] + (i != result.length - 1 ? " " : ""));
+        }
+        System.out.println("");
+
+
+        in.close();
+    }
+    
+    
+ static  void quickSort(int lowerIndex, int higherIndex) {
+         
+        int i = lowerIndex;
+        int j = higherIndex;
+      
+        int pivot = arr[lowerIndex+(higherIndex-lowerIndex)/2];
+        
+        while (i <= j) {
+         
+            while (arr[i] < pivot) {
+                i++;
+            }
+            while (arr[j] > pivot) {
+                j--;
+            }
+            if (i <= j) {
+                exchangeNumbers(i, j);  
+                i++;
+                j--;
+            }
+        }
+      
+        if (lowerIndex < j)
+            quickSort(lowerIndex, j);
+        if (i < higherIndex)
+            quickSort(i, higherIndex);
+    }
+ 
+    static void exchangeNumbers(int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    
+    
+}

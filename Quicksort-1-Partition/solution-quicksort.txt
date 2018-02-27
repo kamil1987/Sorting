@@ -1,0 +1,49 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static int[] quickSort(int[] arr) {
+        
+        int pivot = arr[0];
+        ArrayList left = new ArrayList();
+        ArrayList equal = new ArrayList();
+        ArrayList right = new ArrayList();
+        
+        for(int arr_i = 0; arr_i < arr.length; arr_i++){
+            if (arr[arr_i] < pivot ) left.add(arr[arr_i]);
+            else if (arr[arr_i] == pivot ) equal.add(arr[arr_i]);
+            else if (arr[arr_i] > pivot ) right.add(arr[arr_i]);
+        }
+        List<Integer> combined = new ArrayList<Integer>();
+        combined.addAll(left);
+        combined.addAll(equal);
+        combined.addAll(right);
+        
+        int[] ret = new int[combined.size()];
+          for(int i = 0;i < ret.length;i++) ret[i] = combined.get(i);
+            
+        return ret;
+        
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int[] arr = new int[n];
+        for(int arr_i = 0; arr_i < n; arr_i++){
+            arr[arr_i] = in.nextInt();
+        }
+        int[] result = quickSort(arr);
+        for (int i = 0; i < result.length; i++) {
+            System.out.print(result[i] + (i != result.length - 1 ? " " : ""));
+        }
+        System.out.println("");
+
+
+        in.close();
+    }
+}

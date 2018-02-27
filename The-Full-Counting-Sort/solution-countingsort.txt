@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int[] arr = new int[n];
+        int[]temp = new int[n];
+        ArrayList <String> list = new <String> ArrayList();
+        for (int i =0; i < n ;i++) list.add("");
+        for(int a0 = 0; a0 < n; a0++){
+            int x = in.nextInt();
+            String s = in.next();
+            if(a0 < n/2) s = "-";
+            arr[x]++;
+            temp[a0] = x;
+            list.set( a0, s );
+        }
+        in.close();
+        
+        
+        for(int j=0; j <n;j++){
+            int help = arr[j];
+            if(help >0){
+                for(int i = 0; i <n; i++){
+                
+                  if(temp[i] == j ) System.out.print(list.get(i) + " ");
+                
+                } 
+            }
+            
+        } 
+    }
+}
